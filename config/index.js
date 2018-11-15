@@ -1,4 +1,7 @@
 module.exports = {
+    server: {
+        port: 1314
+    },
     mysql: {
         driver: '',
         host: '',
@@ -14,6 +17,5 @@ module.exports = {
         engine: null
     },
     mongodb: {},
-    redis: {},
-    server_port: 1314
+    redis: {}
 };
