@@ -24,4 +24,4 @@ const server = app.listen(config.server.port, () => {
     // 获取主机名 os.hostname()
     // 获取IPv4 os.networkInterfaces().WLAN[1].address}
     console.log(`Running on http://localhost:${config.server.port}`, `http://${os.networkInterfaces().WLAN[1].address}:${port}`)
-})
+});
