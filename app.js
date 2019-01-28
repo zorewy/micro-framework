@@ -3,6 +3,7 @@ const bodyParser  = require('body-parser');
 const morgan      = require('morgan');
 const os = require('os')
 const config = require('./config/index');
+const db = require('./model/db')
 let app = express();
 
 app.all('*', function(req, res, next) {
@@ -14,8 +15,13 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-app.get('/', function (req, res) {
-    res.send('Hello world\n')
+app.get('/', async (req, res) =>  {
+	await db.single('INSERT INTO users SET  ?', {name: 'asd', email: '112238546@qq.com', password: 'sad2122121'}).then(res => {
+		console.log(res)
+	})
+    let data = await db.row('select * from users')
+
+    res.json(data)
 })
 
 const server = app.listen(config.server.port, () => {
@@ -23,5 +29,5 @@ const server = app.listen(config.server.port, () => {
     let port = server.address().port
     // 获取主机名 os.hostname()
     // 获取IPv4 os.networkInterfaces().WLAN[1].address}
-    console.log(`Running on http://localhost:${config.server.port}`, `http://${os.networkInterfaces().WLAN[1].address}:${port}`)
+    console.log(`Running on http://localhost:${config.server.port}`)
 });
